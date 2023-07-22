@@ -2,10 +2,23 @@
   class="border max-w-screen-md p-8 absolute inset-3 m-auto h-fit rounded-lg flex flex-col gap-8 font-mono"
 >
   <h1 class="text-2xl font-bold">Typing Challenge</h1>
-  <p class="text-lg">Randomly gnenerated sentence</p>
+  <p class="text-lg">
+    <span
+      *ngFor="let letter of randomText.split(''); let i = index"
+      [class]="getClass(letter, i)"
+      >{{ letter }}</span
+    >
+  </p>
   <input
+    [disabled]="enteredText === randomText"
+    (input)="onInput($event)"
     placeholder="Start typing here"
     class="px-5 py-3 border rounded-full outline-none text-xl font-semibold"
   />
-  <p class="text-3xl text-center text-green-400 font-bold">You win!</p>
+  <p
+    class="text-3xl text-center text-green-400 font-bold"
+    *ngIf="enteredText === randomText"
+  >
+    You win!
+  </p>
 </div>
